@@ -2,6 +2,13 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+    list_filter = ('name',)
+
+
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'title', 'add_time')
     search_fields = ('title',)
@@ -52,3 +59,4 @@ admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Upvote, UpvoteAdmin)
 admin.site.register(Downvote, DownvoteAdmin)
+admin.site.register(Category, CategoryAdmin)

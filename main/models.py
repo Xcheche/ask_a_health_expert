@@ -3,10 +3,21 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 # Create your models here.
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    
 
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = 'Categories'
+        ordering = ['name']
+        unique_together = ('name',)
 #Question
 class Question(models.Model):
    user  = models.ForeignKey(User, on_delete=models.CASCADE)
+   category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
    title = models.CharField(max_length=200)
    detail = models.TextField()
    add_time = models.DateTimeField(auto_now_add=True)
