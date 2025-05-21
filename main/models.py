@@ -1,7 +1,12 @@
 from django.db import models
+from accounts.models import CustomUser
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils import timezone
 
+
+
+User = get_user_model()
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -16,7 +21,7 @@ class Category(models.Model):
         unique_together = ('name',)
 #Question
 class Question(models.Model):
-   user  = models.ForeignKey(User, on_delete=models.CASCADE)
+   user  = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
    title = models.CharField(max_length=200)
    detail = models.TextField()
